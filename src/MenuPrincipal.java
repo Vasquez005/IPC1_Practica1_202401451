@@ -1,13 +1,13 @@
 import java.util.Scanner;
-public class SopaLetras {
+
+public class MenuPrincipal {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
         // Variable para almacenar la opción que el usuario seleccionará en el menú
         int partida;
-
-        inicio:
+        salto:
         do {
             // Mostramos el menú en la consola con sus 5 opciones
             System.out.println("ESCOGE UNA VALOR:");
@@ -23,6 +23,7 @@ public class SopaLetras {
 
 
             switch (partida) {
+
                 case 1:
                     // partida 1.1: Pedimos datos del usuario (nombre, carnet, sección)
                     System.out.println("Ingrese su nombre: ");
@@ -60,33 +61,32 @@ public class SopaLetras {
                                     switch (palabras) {
                                         case 1:
                                             // palabras 1: Insertará el no. de palabras y las palabras a escoger
-                                            System.out.println("hola");
-
+                                            EjecucionSopa.ingresarPalabras(scanner);
                                             break;
 
                                         case 2:
                                             // palabras 2: ingresará una palabra a cambiar y colocara una nueva
-                                            System.out.println("hola");
+                                            EjecucionSopa.modificarPalabra(scanner);
                                             break;
 
                                         case 3:
                                             // ingresará una palabra y la eliminará
-                                            System.out.println("hola");
+                                            EjecucionSopa.eliminarPalabra(scanner);
                                             break;
 
                                         case 4:
                                             // regresa al menu principal
-                                            continue inicio;
+                                           continue salto;
 
                                         default:
                                             System.out.println("Opción inválida. Inténtelo de nuevo.");
                                     }
-                                } while (menu != 3); // El bucle se repite hasta que el usuario elija la opción 3 que significa salir.
+                                } while (menu != 4); // El bucle se repite hasta que el usuario elija la opción 3 que significa salir.
                                 break;
 
                             case 2:
                                 // menu 2: creará la tabla de juego y ejecutará el juego
-                                System.out.println("hola");
+                                EjecucionSopa.iniciarJuego(scanner);
                                 break;
 
                             case 3:
