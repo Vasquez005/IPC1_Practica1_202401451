@@ -2,20 +2,25 @@ import java.util.Scanner;
 
 public class MenuPrincipal {
 
+    // Matriz para almacenar usuarios [máximo 10 usuarios]
+    static String[][] usuarios = new String[10][3]; // [número de usuarios][nombre, carnet, sección]
+    static int contadorUsuarios = 0; // Contador de usuarios almacenados
+
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
         // Variable para almacenar la opción que el usuario seleccionará en el menú
         int partida;
-        salto:
+        saltoMenu:
         do {
             // Mostramos el menú en la consola con sus 5 opciones
-            System.out.println("ESCOGE UNA VALOR:");
+            System.out.println("--MENÚ PRINCIPAL--");
             System.out.println("1. Nueva Partida");
             System.out.println("2. Historial de partidas");
             System.out.println("3. Puntuaciones mas altas");
             System.out.println("4. Información del estudiante");
             System.out.println("5. Salir");
+            System.out.println("ESCOGE UNA VALOR:");
 
             // Leemos la opción que ingresa el usuario
             partida = scanner.nextInt();
@@ -23,8 +28,8 @@ public class MenuPrincipal {
 
 
             switch (partida) {
-
                 case 1:
+                    if (contadorUsuarios < 10) { // Verificamos que haya espacio en la matriz
                     // partida 1.1: Pedimos datos del usuario (nombre, carnet, sección)
                     System.out.println("Ingrese su nombre: ");
                     String nombre = scanner.nextLine(); // Leemos el nombre
@@ -34,30 +39,44 @@ public class MenuPrincipal {
                     String seccion = scanner.nextLine(); // Leemos la sección
                     System.out.println("Te damos la bienvenida a la sopa de letras " + nombre); // Mostramos el saludo
 
+                    // Guardamos en la matriz
+                    usuarios[contadorUsuarios][0] = nombre;
+                    usuarios[contadorUsuarios][1] = carnet;
+                    usuarios[contadorUsuarios][2] = seccion;
+                    contadorUsuarios++; // Incrementamos el contador de usuarios
+
+            } else {
+                System.out.println("Límite de usuarios alcanzado. No se pueden registrar más.");
+            }
+
                     // partida 1.2: se presentan 3 opciones (Menu de palabras, jugar, terminar partida)
                     int menu;
+                    menuLoop:
                     do {
-                        System.out.println("ESCOGE UN VALOR:");
+                        System.out.println("--MENÚ SECUNDARIO--");
                         System.out.println("1. Menú de palabras");
                         System.out.println("2. Jugar");
                         System.out.println("3. Terminar partida");
+                        System.out.println("ESCOGE UN VALOR:");
 
                         menu = scanner.nextInt();
                         scanner.nextLine();
-                        switch (menu) {
 
+                        switch (menu) {
                             case 1:
                                 //menu 1: se presentan 4 opciones (insertar, modificar, eliminar, salir)
                                 int palabras;
                                 do {
-                                    System.out.println("ESCOGE UN VALOR");
+                                    System.out.println("--MENÚ DE PALABRAS--");
                                     System.out.println("1. Insertar palabra");
                                     System.out.println("2. Modificar palabra");
                                     System.out.println("3. Eliminar palabra");
                                     System.out.println("4. Salir");
+                                    System.out.println("ESCOGE UN VALOR:");
 
                                     palabras = scanner.nextInt();
                                     scanner.nextLine();
+
                                     switch (palabras) {
                                         case 1:
                                             // palabras 1: Insertará el no. de palabras y las palabras a escoger
@@ -75,9 +94,8 @@ public class MenuPrincipal {
                                             break;
 
                                         case 4:
+                                            continue menuLoop;
                                             // regresa al menu principal
-                                           continue salto;
-
                                         default:
                                             System.out.println("Opción inválida. Inténtelo de nuevo.");
                                     }
@@ -91,9 +109,7 @@ public class MenuPrincipal {
 
                             case 3:
                                 //menu 3: regresara al menu principal
-                                System.out.println("hola");
-                                break;
-
+                                continue saltoMenu;
                             default:
                                 System.out.println("Opción inválida. Inténtelo de nuevo.");
                         }
@@ -120,7 +136,29 @@ public class MenuPrincipal {
 
                 case 4:
                     // partida 4: Mostramos los datos del estudiante (nombre, carnet, sección)
-                    System.out.println("hola");
+                    if (contadorUsuarios == 0) {
+                        System.out.println("No hay usuarios registrados.");
+                        break;
+                    }
+
+                    System.out.println("Ingrese el nombre del usuario que desea consultar:");
+                    String nombreConsulta = scanner.nextLine();
+                    boolean encontrado = false;
+
+                    for (int i = 0; i < contadorUsuarios; i++) {
+                        if (usuarios[i][0].equalsIgnoreCase(nombreConsulta)) {
+                            System.out.println("Información del estudiante:");
+                            System.out.println("Nombre: " + usuarios[i][0]);
+                            System.out.println("Carnet: " + usuarios[i][1]);
+                            System.out.println("Sección: " + usuarios[i][2]);
+                            encontrado = true;
+                            break;
+                        }
+                    }
+
+                    if (!encontrado) {
+                        System.out.println("Usuario no encontrado.");
+                    }
                     break;
 
                 case 5:
