@@ -137,14 +137,19 @@ public class EjecucionSopa {
         imprimirSopa();
 
         int intentos = 0;
-        int palabrasEncontradas = 0;
+        int palabrasEncontradas = 0; // Contador de palabras encontradas
+        int palabrasPendientes = totalPalabras; // Contador de palabras pendientes
+
         while (intentos < INTENTOS_MAXIMOS && palabrasEncontradas < totalPalabras) {
+            System.out.println("\nPalabras encontradas: " + palabrasEncontradas);
+            System.out.println("Palabras pendientes: " + palabrasPendientes);
             System.out.print("Ingrese una palabra a buscar: ");
             String palabraBuscar = sc.nextLine().toUpperCase();
 
             if (marcarPalabraEnSopa(palabraBuscar)) {
                 System.out.println("¡Palabra encontrada y reemplazada con '#'.");
                 palabrasEncontradas++;
+                palabrasPendientes--;
             } else {
                 System.out.println("No se encontró la palabra.");
                 intentos++;
@@ -153,12 +158,14 @@ public class EjecucionSopa {
             imprimirSopa();
 
             if (palabrasEncontradas == totalPalabras) {
-                System.out.println("¡Felicidades! Has encontrado todas las palabras.");
+                System.out.println("\n¡Felicidades! Has encontrado todas las palabras.");
                 return;
             }
         }
 
-        System.out.println("¡Has perdido! No lograste encontrar todas las palabras en " + INTENTOS_MAXIMOS + " intentos.");
+        System.out.println("\n¡Has perdido! No lograste encontrar todas las palabras en " + INTENTOS_MAXIMOS + " intentos.");
+        System.out.println("Palabras encontradas: " + palabrasEncontradas);
+        System.out.println("Palabras que no lograste encontrar: " + palabrasPendientes);
     }
 
     private static void inicializarSopa() {
