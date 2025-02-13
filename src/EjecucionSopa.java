@@ -137,28 +137,34 @@ public class EjecucionSopa {
         imprimirSopa();
 
         int intentos = 0;
-        int palabrasEncontradas = 0; // Contador de palabras encontradas
-        int palabrasPendientes = totalPalabras; // Contador de palabras pendientes
+        int palabrasEncontradas = 0;
+        int palabrasPendientes = totalPalabras;
+        int puntaje = 25; // Se inicia con 25 puntos
 
         while (intentos < INTENTOS_MAXIMOS && palabrasEncontradas < totalPalabras) {
             System.out.println("\nPalabras encontradas: " + palabrasEncontradas);
             System.out.println("Palabras pendientes: " + palabrasPendientes);
+            System.out.println("Puntaje actual: " + puntaje);
             System.out.print("Ingrese una palabra a buscar: ");
             String palabraBuscar = sc.nextLine().toUpperCase();
 
             if (marcarPalabraEnSopa(palabraBuscar)) {
-                System.out.println("¡Palabra encontrada y reemplazada con '#'.");
+                int puntosGanados = palabraBuscar.length(); // Gana puntos según la longitud de la palabra
+                puntaje += puntosGanados;
                 palabrasEncontradas++;
                 palabrasPendientes--;
+                System.out.println("¡Palabra encontrada! Ganaste " + puntosGanados + " puntos.");
             } else {
-                System.out.println("No se encontró la palabra.");
+                puntaje -= 5; // Pierde 5 puntos por cada error
                 intentos++;
+                System.out.println("No se encontró la palabra. Pierdes 5 puntos.");
             }
 
             imprimirSopa();
 
             if (palabrasEncontradas == totalPalabras) {
                 System.out.println("\n¡Felicidades! Has encontrado todas las palabras.");
+                System.out.println("Puntaje final: " + puntaje);
                 return;
             }
         }
@@ -166,7 +172,9 @@ public class EjecucionSopa {
         System.out.println("\n¡Has perdido! No lograste encontrar todas las palabras en " + INTENTOS_MAXIMOS + " intentos.");
         System.out.println("Palabras encontradas: " + palabrasEncontradas);
         System.out.println("Palabras que no lograste encontrar: " + palabrasPendientes);
+        System.out.println("Puntaje final: " + puntaje);
     }
+
 
     private static void inicializarSopa() {
         for (int i = 0; i < TAMANO; i++) {
