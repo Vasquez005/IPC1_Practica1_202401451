@@ -15,7 +15,7 @@ public class MenuPrincipal {
             System.out.println("--MENÚ PRINCIPAL--");
             System.out.println("1. Nueva Partida");
             System.out.println("2. Historial de partidas");
-            System.out.println("3. Puntuaciones mas altas");
+            System.out.println("3. Puntuaciones mas altas (no disponible)");
             System.out.println("4. Información del estudiante");
             System.out.println("5. Salir");
             System.out.println("ESCOGE UNA VALOR:");

@@ -16,7 +16,7 @@ public class EjecucionSopa {
     private static final Random random = new Random();
     private static final char RELLENO = '#'; //Relleno de las palabras encontradas
     private static final int INTENTOS_MAXIMOS = 4; //Definiendo el tamaño máximo de los intentos por usuario
-    private static String[] bancoPalabras = new String[100]; // Cramos un Banco de palabras con máximo de 100 palabras
+    private static String[] bancoPalabras = new String[15]; // Cramos un Banco de palabras con máximo de 15 palabras
     private static int totalPalabras = 0; // Contador de palabras en el banco de palabras
 
 
@@ -74,7 +74,7 @@ public class EjecucionSopa {
 
     // Proceso que ejecuta la opción "Insertar palabras"//////////////////////////
     public static void ingresarPalabras(Scanner sc) {
-        System.out.print("Ingrese la cantidad de palabras a agregar: ");
+        System.out.print("Ingrese la cantidad de palabras a agregar (máximo de 15 palabras): ");
         int numPalabras = sc.nextInt();
         sc.nextLine();
 
